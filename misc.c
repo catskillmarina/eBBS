@@ -35,9 +35,7 @@ char *buf;
 
 #define MAILDIR     "mail"
 
-get_mail_directory(userid, buf)
-char *userid;
-char *buf;
+get_mail_directory( char *userid, char *buf )
 {
   get_home_directory(userid, buf);
   strcat(buf, "/");
@@ -46,9 +44,7 @@ char *buf;
 
 #define PLANFILE    "plan"
 
-local_bbs_get_plan(userid, buf)
-char *userid;
-char *buf;
+local_bbs_get_plan( char *userid, char *buf )
 {
   get_home_directory(userid, buf);
   strcat(buf, "/");
@@ -58,8 +54,7 @@ char *buf;
 
 #define SIGFILE     "signature"
 
-local_bbs_get_signature(buf)
-char *buf;
+local_bbs_get_signature(char *buf)
 {
   get_home_directory(my_userid(), buf);
   strcat(buf, "/");
@@ -69,9 +64,7 @@ char *buf;
 
 #define BOARDHOME  "boards"
 
-get_board_directory(bname, buf)
-char *bname;
-char *buf;
+get_board_directory( char *bname, char *buf )
 {
   strcpy(buf, BOARDHOME);
   strcat(buf, "/");
@@ -81,8 +74,7 @@ char *buf;
 
 #define ISSUEFILE   "etc/issue"
 
-local_bbs_get_issue(buf)
-char *buf;
+local_bbs_get_issue(char *buf)
 {
   strcpy(buf, ISSUEFILE);
   return S_OK;
@@ -90,8 +82,7 @@ char *buf;
 
 #define INFOFILE   "etc/info"
 
-local_bbs_get_info(buf)
-char *buf;
+local_bbs_get_info(char *buf)
 {
   strcpy(buf, INFOFILE);
   return S_OK;
@@ -99,8 +90,7 @@ char *buf;
 
 #define GNUFILE    "etc/COPYING"
 
-local_bbs_get_license(buf)
-char *buf;
+local_bbs_get_license(char *buf)
 {
   strcpy(buf, GNUFILE);
   return S_OK;
@@ -108,15 +98,13 @@ char *buf;
 
 #define WELCFILE   "etc/welcome"
 
-local_bbs_get_welcome(buf)
-char *buf;
+local_bbs_get_welcome(char *buf)
 {
   strcpy(buf, WELCFILE);
   return S_OK;
 }
 
-local_bbs_set_welcome(buf)
-char *buf;
+local_bbs_set_welcome(char *buf)
 {
   int rc = 0;
   if (buf == NULL) {

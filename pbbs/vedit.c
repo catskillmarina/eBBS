@@ -22,6 +22,8 @@
 */
 
 #include <stdio.h>
+#include <string.h>
+#include <malloc.h>
 #include "osdeps.h"
 #include <sys/stat.h>
 #include "io.h"

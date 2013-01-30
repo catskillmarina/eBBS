@@ -3,16 +3,13 @@
 extern char *optarg;
 extern int optind;
 
-usage(prog)
-char *prog;
+usage(char *prog)
 {
   fprintf(stderr, 
 	  "Usage: %s [-d bbs-dir] [-h log-header] log-level message\n", prog);
 }
 
-main(argc, argv)
-int argc;
-char *argv[];
+main( int argc, char *argv[])
 {
     char *bbshome = NULL;
     char *logheader = NULL;

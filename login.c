@@ -40,7 +40,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 # else
 #  include <utmp.h>
 #  ifndef UTMP_FILE
-#   define UTMP_FILE "/etc/utmp"
+#   define UTMP_FILE "/var/log/wtmp"
 #  endif
 # endif
 #endif

@@ -24,8 +24,7 @@ extern USERDATA user_params;
 
 extern char *optarg;
 
-usage(prog)
-char *prog;
+usage(char *prog)
 {
   fprintf(stderr, 
 	  "Usage: %s -i userid -p passwd [-u username] [-t termtype]\n", prog);
@@ -33,9 +32,7 @@ char *prog;
 	  "       [-e email] [-r realname] [-a address] [-d bbs-dir]\n");
 }
 
-main(argc, argv)
-int argc;
-char *argv[];
+main( int argc, char *argv[])
 {
     char *bbshome = NULL;
     int iflg, pflg, uflg;

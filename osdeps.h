@@ -107,6 +107,8 @@ typedef unsigned short SHORT;	/* 16-bit unsigned */
 # define WANTS_VARARGS_H 1
 #endif
 
+#define WANTS_VARARGS_H 0
+
 /*
    Do you have a <sys/select.h> header file and need it?
 */

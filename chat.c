@@ -18,11 +18,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
-#include "server.h"
 #include <signal.h>
+#include <unistd.h>
 #include <errno.h>          /* this may be just temporary */
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdlib.h>
+#include "server.h"
 #ifdef NeXT
 # include <sys/wait.h>
 # include <sys/time.h>

@@ -22,6 +22,9 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <malloc.h>
 #include "osdeps.h"
 #if NO_TERMIO
 # include <sgtty.h>

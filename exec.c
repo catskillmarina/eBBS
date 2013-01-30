@@ -21,6 +21,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "server.h"
 #include <fcntl.h>
 #include <signal.h>
+#include <stdlib.h>
 
 #define MAXCOMSZ   (1024) /* Maximum length of do_exec command */
 #define MAXFILELEN (80)   /* Maximum length of the executable file name */

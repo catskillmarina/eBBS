@@ -21,11 +21,14 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "server.h"
 #include <time.h>
 #include <unistd.h>
-#if WANTS_VARARGS_H
-# include <varargs.h>
-#else
-# include <stdarg.h>
-#endif
+
+/* #if WANTS_VARARGS_H  */
+/* # include <varargs.h>  */
+/* #else  */
+/* # include <stdarg.h>  */
+/* #endif  */
+
+#include <stdarg.h>
 
 PATH bbs_logfile;
 int bbs_loglevel;

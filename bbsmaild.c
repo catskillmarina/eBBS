@@ -26,10 +26,7 @@ RNAME sendername;
 char *sptr;
 int ssize;
 
-char *
-identify_header(str, hdr_type)
-char *str;
-int *hdr_type;
+char * identify_header( char *str, int *hdr_type )
 {
     char *cp, *colon;
     colon = strchr(str, ':');
@@ -54,9 +51,7 @@ int *hdr_type;
     return cp;
 }
 
-split_sender(type, str)
-int type;
-char *str;
+split_sender( int type, char *str )
 {
     /* 
         This splits a From: or Reply-To: header into the address and 
@@ -99,8 +94,7 @@ char *str;
     return 0;
 }
 
-eat_header(str)
-char *str;
+eat_header(char *str)
 {
     /* 
        This attempts to determine if we are reading headers. It is 
@@ -144,10 +138,7 @@ char *str;
     return 1;
 }
 
-show_failures(indx, userid, mask)
-int indx;
-char *userid;
-LONG *mask;
+show_failures( int indx, char *userid, LONG *mask )
 {
     if ((*mask) & (LONG)(1<<indx)) {
         fprintf(stderr, "%s: bbs_mail failed\n", userid);
@@ -155,8 +146,7 @@ LONG *mask;
     return S_OK;
 }
 
-usage(prog)
-char *prog;
+usage(char *prog)
 {
     if (daemon)
         fprintf(stderr, "Usage: %s [-d bbs-dir] user ...\n", prog);
@@ -165,9 +155,7 @@ char *prog;
                 prog);
 }
 
-main(argc, argv)
-int argc;
-char *argv[];
+main( int argc, char *argv[] )
 {
     char *bbshome = NULL, *prog;
     char copybuf[256];

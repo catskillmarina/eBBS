@@ -19,7 +19,8 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #include "client.h"
 #include <ctype.h>
-#include <varargs.h>
+/* #include <varargs.h> */
+#include <stdarg.h>
 
 #define CHAT_PROMPT  "-->"
 #define CHAT_HELP_FILE "etc/chathlp.txt"

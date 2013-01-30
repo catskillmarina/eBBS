@@ -30,7 +30,7 @@ INCLUDES=
 # MachTen needs -lcompat
 # Unixware needs -lsocket -lnsl (and maybe -L/usr/ucblib -lucb)
 # FreeBSD needs -lcrypt -lcompat -lipc
-LIBS=
+LIBS=-lcrypt
 
 # flags for the compiler
 # NeXT wants -pipe -s -O4 -arch m68040; FreeBSD wants -O2 -m486 -pipe
@@ -217,3 +217,5 @@ clean:
 
 clobber: clean
 	rm -f $(BINS) libbbs.a pbbs/libpbbs.a
+
+distclean:	clobber

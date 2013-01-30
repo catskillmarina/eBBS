@@ -21,9 +21,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "client.h"
 #include <signal.h>
 #include <time.h>
+#include <stdlib.h>
 #ifdef REMOTE_CLIENT
 # include <pwd.h>
-# include <stdlib.h>
 #endif
 
 BBSINFO serverinfo;		/* server's info structure */
@@ -63,8 +63,7 @@ char *str;
   return 0;
 }
 
-disconnect(status)
-int status;
+disconnect(int status)
 {
   unlink(c_tempfile);
   bbs_disconnect();
@@ -409,7 +408,7 @@ char *argv[];
     FILE *fp = fopen(fname, "r");
     char buf[80];
     if (fp) {
-      while (fgets(buf, sizeof(buf), fp)) 
+        while (fgets(buf, (sizeof(buf)-1), fp)) 
 	prints(buf);
       fclose(fp);
     }

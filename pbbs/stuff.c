@@ -22,8 +22,10 @@
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/param.h>
 #include <signal.h>
+#include <string.h>
 #if LACKS_MALLOC_H
 # include <stdlib.h>
 #else
