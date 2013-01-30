@@ -22,10 +22,12 @@
 */
 
 #include <stdio.h>
+#include <string.h>
 #include "osdeps.h"
 #include "io.h"
 #include "screen.h"
-#include <varargs.h>
+/* #include <varargs.h> */
+#include <stdarg.h>
 #if LACKS_MALLOC_H
 # include <stdlib.h>
 #else
@@ -139,9 +141,7 @@ rel_move(was_col,was_ln,new_col,new_ln)
 }
 
 
-standoutput(buf,ds,de,sso,eso)
-char *buf ;
-int ds,de,sso,eso ;
+standoutput(char *buf,int ds,int de,int sso,int eso)
 {
     int st_start, st_end ;
 
@@ -162,9 +162,7 @@ int ds,de,sso,eso ;
 
 #if COLOR
 /* Yeah, it's ripped off from the above function */
-coloroutput(buf,ds,de,sco,eco,colnum)
-char *buf ;
-int ds,de,sco,eco,colnum ;
+coloroutput(char *buf,int ds,int de,int sco,int eco,int colnum)
 {
     int st_start, st_end ;
     char strtcolbuf[80];
@@ -375,15 +373,13 @@ move(y,x)
     cur_ln = y ;
 }
 
-getyx(y,x)
-int *y,*x ;
+getyx(int *y, int *x)
 {
     *y = cur_ln ;
     *x = cur_col ;
 }
 
-outc(c)
-register unsigned char c ;
+outc(register unsigned char c)
 {
     register struct screenline *slp ;
 
@@ -467,16 +463,13 @@ register unsigned char c ;
     }
 }
 
-outs(str)
-register char *str ;
+outs(register char *str)
 {
 	while(*str != '\0')
 		outc(*str++) ;
 }
 
-outns(str,n)
-register char *str ;
-register int n ;
+outns(register char *str,register int n)
 {
     for(;n>0;n--)
       outc(*str++) ;
@@ -541,8 +534,7 @@ standend()
 }
 
 #if COLOR
-colorstart(colnum)
-int colnum;
+colorstart(int colnum)
 {
     register struct screenline *slp ;
 
@@ -574,18 +566,17 @@ colorend()
 
 int dec[] = {1000000000,100000000,10000000,1000000,100000,10000,1000,100,10,1} ;
  
-prints(va_alist)
-va_dcl
+void prints(char *va_alist, ...)
 {
-	va_list ap ;
+	va_list ap;
 	register char *fmt ;
-    char *bp ;
+        char *bp ;
 	register int i, count, hd, indx ;
 
-	va_start(ap) ;
+	va_start(ap,va_alist) ;
 	fmt = va_arg(ap, char *) ;
 	while(*fmt != '\0')
-      {
+      	{
           if(*fmt == '%')
             {
                 int sgn = 1 ;
@@ -687,8 +678,8 @@ va_dcl
           
           outc(*fmt) ;
           fmt++ ;
-      }
-  endprint:
+      	}
+        endprint:
     
 	return ;
 }
