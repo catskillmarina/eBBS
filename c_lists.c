@@ -29,10 +29,7 @@ struct disp_list {
 };
 
 /*ARGSUSED*/
-display_list_element(indx, name, arg)
-int indx;
-char *name;
-void *arg;
+display_list_element( int indx, char *name, void *arg )
 {
   struct disp_list *info = arg;
   move(info->y, info->x);
@@ -43,9 +40,7 @@ void *arg;
   }
 }
   
-display_list(header, list)
-char *header;
-NAMELIST list;
+display_list( char *header, NAMELIST list )
 {
   struct disp_list info;
   info.x = 0;

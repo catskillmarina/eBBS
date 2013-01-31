@@ -42,10 +42,7 @@ NAMELIST protolist;
 #endif
 
 /*ARGSUSED*/
-AllFileBoardsFunc(indx, board, info)
-int indx;
-BOARD *board;
-struct enum_info *info;
+AllFileBoardsFunc( int indx, BOARD *board, struct enum_info *info )
 {
   if (info->topline == info->currline) {
     move(info->topline-1, 0);
@@ -117,10 +114,7 @@ FileSelect()
   return (FULLUPDATE | NEWDIRECT);
 }
 
-OpenFileBoard(openflags, newonly, resp)
-int *openflags;
-int newonly;
-int *resp;
+OpenFileBoard( int *openflags, int newonly, int *resp )
 {
   int code;
   OPENINFO openinfo;
@@ -131,7 +125,7 @@ int *resp;
   return (newonly ? openinfo.newmsgs : openinfo.totalmsgs);
 }
 
-CloseFileBoard()
+int CloseFileBoard()
 {
   int code;
   code = bbs_close_board();
@@ -165,9 +159,7 @@ SelectProtocol()
   return FULLUPDATE;
 }
 
-FileView(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-int currmsg, numrecs, openflags;
+FileView( HEADER *hptr, int currmsg, int numrecs, int openflags )
 {
   int rc;
   PATH fname;
@@ -265,9 +257,7 @@ FileUpload()
   return FULLUPDATE;
 }
 
-FileReceive(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-LONG currmsg, numrecs, openflags;
+FileReceive( HEADER *hptr, LONG currmsg, LONG numrecs, LONG openflags )
 {
   char ans[4];
 #ifdef REMOTE_CLIENT
@@ -330,9 +320,7 @@ LONG currmsg, numrecs, openflags;
 }
 
 /*ARGSUSED*/
-FileForward(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-int currmsg, numrecs, openflags;
+FileForward( HEADER *hptr, int currmsg, int numrecs, int openflags )
 {
   int code, rc = FULLUPDATE;
   ACCOUNT acct;
@@ -366,9 +354,7 @@ int currmsg, numrecs, openflags;
 }
 
 /*ARGSUSED*/
-FileChdir(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-int currmsg, numrecs, openflags;
+FileChdir( HEADER *hptr, int currmsg, int numrecs, int openflags )
 {
   OPENINFO oinfo;
   if (!BITISSET(hptr->flags, FILE_DIRECTORY)) {
@@ -382,9 +368,7 @@ int currmsg, numrecs, openflags;
 }
 
 /*ARGSUSED*/
-FileReadMenuSelect(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-int currmsg, numrecs, openflags;
+FileReadMenuSelect( HEADER *hptr, int currmsg, int numrecs, int openflags )
 {
   return (FileSelect());
 }
@@ -392,9 +376,7 @@ int currmsg, numrecs, openflags;
 #ifndef REMOTE_CLIENT
 
 /*ARGSUSED*/
-FileReadMenuProto(hptr, currmsg, numrecs, openflags)
-HEADER *hptr;
-int currmsg, numrecs, openflags;
+FileReadMenuProto( HEADER *hptr, int currmsg, int numrecs, int openflags )
 {
   return (SelectProtocol());
 }

@@ -45,9 +45,7 @@ struct usertopid {
   int count;
 };
 
-void
-page_handler(sig)
-int sig;
+void page_handler(intsig)
 {
   bell();
   bell();
@@ -74,19 +72,14 @@ NewPagePending()
   return 0;
 }
 
-PrintLoginEntry(num, urec)
-int num;
-USEREC *urec;
+void PrintLoginEntry( int num, USEREC *urec )
 {
   prints("%2d %-12s  %-24s %-30s %s\n", num, urec->userid, 
 	 urec->username, urec->fromhost, ModeToString(urec->mode));
 }
 
 /*ARGSUSED*/
-PickLogin(indx, urec, info)
-int indx;
-USEREC *urec;
-struct usertopid *info;
+PickLogin( int indx, USEREC *urec, struct usertopid *info )
 {
   if (info->count >= MAX_HANDLED_LOGINS) return ENUM_QUIT;
   info->pids[info->count++] = urec->pid;
@@ -102,9 +95,7 @@ struct usertopid *info;
   return S_OK;
 }  
 
-LONG
-UseridToPid(userid)
-char *userid;
+LONG UseridToPid(char *userid)
 {
   struct usertopid u2p;
   int x, y, indx;
@@ -161,9 +152,7 @@ Kick()
   return FULLUPDATE;
 }
 
-void
-TalkAdvanceLine(ts)
-struct talkwin *ts;
+void TalkAdvanceLine( struct talkwin *ts )
 {
   if (++ts->currln > ts->lastln) ts->currln = ts->firstln;
   move((ts->currln == ts->lastln ? ts->firstln : ts->currln+1), 0);
@@ -172,9 +161,7 @@ struct talkwin *ts;
   clrtoeol();
 }
 
-DoTalkChar(ch, ts)
-char ch;
-struct talkwin *ts;
+int DoTalkChar( char ch, struct talkwin *ts )
 {
   /* This function handles backspaces, newlines, and printables. */
   move(ts->currln, ts->currcol);
@@ -224,16 +211,13 @@ struct talkwin *ts;
   return 0;
 }
 
-DoTalkString(s, tw)
-char *s;
-struct talkwin *tw;
+int DoTalkString( char *s, struct talkwin *tw )
 {
   for (; s && *s; s++) DoTalkChar(*s, tw);
   return 0;
 }
 
-talk_show_page_request(ln)
-int ln;
+int talk_show_page_request(int ln)
 {
   USEREC urec;
   char buf[80];
@@ -249,10 +233,7 @@ int ln;
   return 0;
 }
 
-_talk_enum_users(count, urec, tw)
-int count;
-USEREC *urec;
-struct talkwin *tw;
+_talk_enum_users( int count, USEREC *urec, struct talkwin *tw )
 {
   char buf[NAMELEN+10];
   sprintf(buf, ",%s%s [%c]", BITISSET(urec->flags, FLG_CLOAK) ? " #" : " ",
@@ -261,8 +242,7 @@ struct talkwin *tw;
   return S_OK;
 }
     
-talk_user_list(tw)
-struct talkwin *tw;
+int talk_user_list( struct talkwin *tw )
 {
   DoTalkString("\n*** Users currently online ***\n", tw);
   bbs_enum_users(10, 0, NULL, _talk_enum_users, tw);
@@ -270,8 +250,7 @@ struct talkwin *tw;
   return 0;
 }    
 
-DrawDivider(ln)
-int ln;
+void DrawDivider(int ln)
 {
   int i;
   move(ln, 0);
@@ -281,8 +260,7 @@ int ln;
   refresh();
 }
 
-DoTalk(sock)
-int sock;
+int DoTalk(int sock)
 {
   int i, ch, cc;
   int divider;

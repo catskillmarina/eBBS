@@ -16,10 +16,7 @@ char *prog;
 }
 
 /*ARGSUSED*/
-one_line_display(indx, urec, count)
-int indx;
-USEREC *urec;
-int *count;
+one_line_display(int indx, USEREC *urec, int *count)
 {
   printf("%-12s    %-25s %-25s   %s\n", urec->userid, 
 	 urec->username, urec->fromhost, 
@@ -29,9 +26,7 @@ int *count;
   return S_OK;
 }
 
-main(argc, argv)
-int argc;
-char *argv[];
+main(int argc, char *argv[])
 {
     char *bbshome = NULL;
     int c, count = 0;

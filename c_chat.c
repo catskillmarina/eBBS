@@ -33,8 +33,7 @@ int g_currline;
 int g_echatwin;
 int g_you_have_mail;
 
-print_chatid(chatid)
-char *chatid;
+print_chatid( char *chatid )
 {
   char buf[CHATID_MAX+2];
   int i;
@@ -49,8 +48,7 @@ char *chatid;
   return 0;
 }
 
-printchatline(str)
-char *str;
+printchatline(char *str)
 {
   int linelen = t_columns-1, len = strlen(str);
 #if COLOR
@@ -111,8 +109,7 @@ char *str;
   }
 }
 
-chat_help(helpfile)
-char *helpfile;
+chat_help(char *helpfile)
 {
   FILE *fp;
   char buf[84];
@@ -129,8 +126,7 @@ char *helpfile;
   return 0;
 }
 
-chat_resetscreen(chatid)
-char *chatid;
+chat_resetscreen(char *chatid)
 {
   int i;
   char buf[80];
@@ -153,10 +149,7 @@ struct _chatlist {
   char buf[80];
 };
 
-chat_list_users_func(indx, urec, cl)
-int indx;
-USEREC *urec;
-struct _chatlist *cl;
+chat_list_users_func( int indx, USEREC *urec, struct _chatlist *cl )
 {
   indx++;    /* Start counting at one, not zero. */
   if (indx < cl->start) return S_OK;
@@ -186,9 +179,7 @@ struct _chatlist *cl;
   return S_OK;
 }
 
-chat_list_users(cbuf, verbose)
-char *cbuf;
-int verbose;
+chat_list_users( char *cbuf, int verbose )
 {
   struct _chatlist cl;
   extern char global_modechar_key[];
@@ -226,8 +217,7 @@ int verbose;
 
 extern int _query_if_logged_in __P((int, USEREC *, int *));
 
-chat_query_user(cbuf)
-char *cbuf;
+chat_query_user(char *cbuf)
 {
   ACCOUNT acct;
   char buf[80];
@@ -266,7 +256,7 @@ char *cbuf;
   return 0;
 }
 
-chat_show_page_request()
+int chat_show_page_request()
 {
   USEREC urec;
   char buf[80];
@@ -279,9 +269,7 @@ chat_show_page_request()
   return 0;
 }
 
-chat_process_incoming(fd, chatid)
-int fd;
-char *chatid;
+chat_process_incoming( int fd, char *chatid )
 {
   static char buf[CHATLINE_MAX*2+1];
   static int bufstart = 0;
@@ -316,17 +304,14 @@ char *chatid;
   return 0;  
 }
 
-chat_exit(buf)
-char *buf;
+chat_exit(char *buf)
 {
   /* Send the line, then return 1 so we exit. */
   bbs_chat_send(buf);
   return 1;
 }
 
-chat_cmd_match(buf, str)
-char *buf;
-char *str;
+chat_cmd_match( char *buf, char *str )
 {
   if (*buf != '/') return 0;
   for (buf++; *str && *buf && !isspace(*buf); buf++, str++) {
@@ -335,9 +320,7 @@ char *str;
   return 1;
 }
 
-chat_process_local(cbuf, chatid)
-char *cbuf;
-char *chatid;
+chat_process_local( char *cbuf, char *chatid )
 {
   /* 
      See if the typed line should be handled locally. If not, return -1.

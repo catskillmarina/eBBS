@@ -32,9 +32,7 @@ extern NAMELIST restricted_list;
 extern NAME mainroom;
 extern int no_punct_in_chatids;
 
-_chat_config_form_list(list, str)
-NAMELIST *list;
-char *str;
+_chat_config_form_list( NAMELIST *list, char *str )
 {
   char *userid;  
   while ((userid = strtok(str, ", \t")) != NULL) {
@@ -45,10 +43,7 @@ char *str;
 }
 
 /*ARGSUSED*/
-_chat_init_config_func(indx, rec, arg)
-int indx;
-char *rec;
-void *arg;
+_chat_init_config_func( int indx, char *rec, void *arg )
 {
   char *equals;
   int i;
@@ -82,9 +77,7 @@ chat_init_config()
   return S_OK;
 }
 
-chat_get_ignore_file(userid, buf)
-char *userid;
-char *buf;
+chat_get_ignore_file( char *userid, char *buf )
 {
   get_home_directory(userid, buf);
   strcat(buf, "/");

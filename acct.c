@@ -207,9 +207,7 @@ lookup_profile_name( char *userid, char *namebuf )
 #define PF_USERNAME_OFFSET    (PF_FLAGS_OFFSET+5)
 #define PF_END_OF_RECORD      (PF_USERNAME_OFFSET+UNAMELEN+1)
 
-format_passent(rec, acct)
-char *rec;
-ACCOUNT *acct;
+format_passent( char *rec, ACCOUNT *acct)
 {
   memset(rec, ' ', PF_USERNAME_OFFSET+UNAMELEN);
   memcpy(rec+PF_USERID_OFFSET, acct->userid, strlen(acct->userid));
@@ -259,9 +257,8 @@ _lookup_account( char *userid, ACCOUNT *acct )
   return rc;
 }
 
-local_bbs_add_account( ACCOUNT *newacct, SHORT is_encrypted )
+local_bbs_add_account(ACCOUNT *newacct, SHORT is_encrypted)
 {
-
   int rc;
   ACCOUNT acct;
   PATH homedir;

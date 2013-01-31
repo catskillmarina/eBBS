@@ -30,8 +30,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 NAMELIST acctlist;
 extern LOGININFO myinfo;     /* for idle timeout in Monitor */
 
-CheckUserid(userid)
-char *userid;
+CheckUserid(char *userid)
 {
   ACCOUNT acct;
   if (userid[0] == '\0') return 1;
@@ -40,9 +39,7 @@ char *userid;
   return 0;
 }
 
-PromptForAccountInfo(acct, for_self)
-ACCOUNT *acct;
-int for_self;
+int PromptForAccountInfo( ACCOUNT *acct, int for_self )
 {
   PASSWD passcfm;
   char ans[4];
@@ -99,10 +96,7 @@ int for_self;
 }
 
 /*ARGSUSED*/
-AllUsersFunc(indx, acct, info)
-int indx;
-ACCOUNT *acct;
-struct enum_info *info;
+AllUsersFunc( int indx, ACCOUNT *acct, struct enum_info *info )
 {
   if (info->topline == info->currline) {
     move(info->topline-1, 0);
@@ -153,10 +147,7 @@ AllUsers()
 }
 
 /*ARGSUSED*/
-OnlineUsersFunc(indx, urec, info)
-int indx;
-USEREC *urec;
-struct enum_info *info;
+OnlineUsersFunc( int indx, USEREC *urec, struct enum_info *info )
 {
   if (info->topline == info->currline) {
     move(info->topline-1, 0);
@@ -236,10 +227,7 @@ SetupGlobalList()
 }
 
 /*ARGSUSED*/
-FillShortUserList(indx, urec, arg)
-int indx;
-USEREC *urec;
-void *arg;
+FillShortUserList( int indx, USEREC *urec, void *arg )
 {
   int i;
   for (i=0; i<global_ulist_sz; i++)
@@ -529,8 +517,7 @@ SetCharset()
   return FULLUPDATE;
 }
 
-UserDisplay(acct)
-ACCOUNT *acct;
+UserDisplay( ACCOUNT *acct )
 {
   prints("[%s]\n", acct->userid);
   prints("User name:       %s\n", acct->username);
@@ -845,10 +832,7 @@ QueryEdit()
 }
 
 /*ARGSUSED*/
-_query_if_logged_in(indx, urec, loggedin)
-int indx;
-USEREC *urec;
-int *loggedin;
+_query_if_logged_in( int indx, USEREC *urec, int *loggedin )
 {
   (*loggedin)++;
   return ENUM_QUIT;

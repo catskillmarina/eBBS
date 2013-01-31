@@ -28,18 +28,14 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
 #define MGR_FILE    "managers"
 
-get_managers_file(bname, buf)
-char *bname;
-char *buf;
+get_managers_file( char *bname, char *buf )
 {
   get_board_directory(bname, buf);
   strcat(buf, "/");
   strcat(buf, MGR_FILE);
 }
 
-local_bbs_set_boardmgrs(bname, list)
-char *bname;
-NAMELIST list;
+local_bbs_set_boardmgrs( char *bname, NAMELIST list )
 {
   BOARD board;
   PATH buf;
@@ -48,9 +44,7 @@ NAMELIST list;
   return (write_namelist(buf, list));
 }
 
-local_bbs_get_boardmgrs(bname, list)
-char *bname;
-NAMELIST *list;
+local_bbs_get_boardmgrs( char *bname, NAMELIST *list )
 {
   BOARD board;
   PATH buf;
@@ -59,23 +53,20 @@ NAMELIST *list;
   return (read_namelist(buf, list));
 }
 
-_has_read_access(board)
-BOARD *board;
+_has_read_access( BOARD *board )
 {
   if (board->readmask == 0) return 1;
   return (_has_perms(board->readmask));
 }
 
-_has_post_access(board)
-BOARD *board;
+_has_post_access( BOARD *board )
 {
   if (!_has_access(C_POST)) return 0;
   if (board->postmask == 0) return 1;
   return (_has_perms(board->postmask));
 }
 
-_has_manager_access(board)
-BOARD *board;
+_has_manager_access( BOARD *board )
 {
   PATH mgrfile;
   if (_has_access(C_ALLBOARDMGR)) return 1;
@@ -85,9 +76,7 @@ BOARD *board;
   else return 0;
 }  
 
-format_boardent(rec, board)
-char *rec;
-BOARD *board;
+format_boardent( char *rec, BOARD *board )
 {
   rec[0] = '\0';
   rec = _append_quoted(rec, board->name);
@@ -100,9 +89,7 @@ BOARD *board;
   return S_OK;
 }
 
-boardent_to_board(rec, board)
-char *rec;
-BOARD *board;
+boardent_to_board( char *rec, BOARD *board )
 {
   rec = _extract_quoted(rec, board->name, sizeof(board->name));
   board->readmask = hex2LONG(rec);
@@ -113,8 +100,7 @@ BOARD *board;
   return S_OK;
 }
 
-hide_priv_board_fields(board)
-BOARD *board;
+hide_priv_board_fields( BOARD *board )
 {
   if (!_has_access(C_SEEALLBINFO)) {
     board->readmask = 0;
@@ -122,9 +108,7 @@ BOARD *board;
   }
 }  
 
-_lookup_board(bname, board)
-char *bname;
-BOARD *board;
+_lookup_board( char *bname, BOARD *board )
 {
   int rc;
   memset(board, 0, sizeof *board);
@@ -132,8 +116,7 @@ BOARD *board;
   return rc;
 }
 
-local_bbs_add_board(newboard)
-BOARD *newboard;
+local_bbs_add_board( BOARD *newboard )
 {
   int rc;
   BOARD board;
@@ -157,8 +140,7 @@ BOARD *newboard;
   return S_OK;
 }
 
-local_bbs_delete_board(bname)
-char *bname;
+local_bbs_delete_board(chat *bname)
 {
   int rc;
   BOARD board;
@@ -178,9 +160,7 @@ char *bname;
   return S_OK;
 }
 
-local_bbs_get_board(bname, board)
-char *bname;
-BOARD *board;
+local_bbs_get_board( char *bname, BOARD *board )
 {
   int rc;
   BOARD myboard;
@@ -196,19 +176,13 @@ BOARD *board;
 }
 
 /*ARGSUSED*/
-update_boardent(newrec, oldrec, board)
-char *newrec;
-char *oldrec;
-BOARD *board;
+update_boardent( char *newrec, char *oldrec, BOARD *board )
 {
   format_boardent(newrec, board);    
   return S_OK;
 }
 
-_set_board(bname, newboard, flags)
-char *bname;
-BOARD *newboard;
-SHORT flags;
+_set_board( char *bname, BOARD *newboard, SHORT flags )
 {
   int rc;
   BOARD board;
@@ -251,10 +225,7 @@ SHORT flags;
   return S_OK;
 }
 
-local_bbs_modify_board(bname, board, flags)
-char *bname;
-BOARD *board;
-SHORT flags;
+local_bbs_modify_board( char *bname, BOARD *board, SHORT flags )
 {
   if (flags & MOD_BNAME)
     bbslog(2, "MODIFYBOARD %s to %s by %s\n", bname, board->name, my_userid());
@@ -263,10 +234,7 @@ SHORT flags;
   return(_set_board(bname, board, flags));
 }
 
-_enum_boards(indx, rec, en)
-int indx;
-char *rec;
-struct enumstruct *en;
+_enum_boards( int indx, char *rec, struct enumstruct *en )
 {
   BOARD board;
   SHORT order;
@@ -310,10 +278,7 @@ void *arg;
   return S_OK;
 }
 
-_fill_boardnames(indx, rec, lc)
-int indx;
-char *rec;
-struct listcomplete *lc;
+_fill_boardnames( int indx, char *rec, struct listcomplete *lc )
 {
   BOARD board;
   boardent_to_board(rec, &board);
@@ -324,9 +289,7 @@ struct listcomplete *lc;
   return S_OK;
 }
 
-local_bbs_boardnames(list, complete)
-NAMELIST *list;
-char *complete;
+local_bbs_boardnames( NAMELIST *list, char *complete )
 {
   struct listcomplete lc;
   create_namelist(list);
@@ -337,10 +300,7 @@ char *complete;
 }
 
 /*ARGSUSED*/
-_visit_all_boards(indx, rec, arg)
-int indx;
-char *rec;
-void *arg;
+_visit_all_boards( int indx, char *rec, void *arg )
 {
   BOARD board;
   boardent_to_board(rec, &board);
@@ -350,8 +310,7 @@ void *arg;
   return S_OK;
 }
 
-local_bbs_visit_board(bname)
-char *bname;
+local_bbs_visit_board(char *bname)
 {
   int rc;
   BOARD board;
@@ -374,10 +333,7 @@ char *bname;
 */
 
 /*ARGSUSED*/
-_do_fix_manager(indx, rec, ncs)
-int indx;
-char *rec;
-struct namechange *ncs;
+_do_fix_manager( int indx, char *rec, struct namechange *ncs )
 {
   BOARD board;
   PATH mgrfile;
@@ -391,9 +347,7 @@ struct namechange *ncs;
   return S_OK;
 }
 
-_board_enum_fix_managers(oldname, newname)
-char *oldname;
-char *newname;
+_board_enum_fix_managers( char *oldname, char *newname )
 {
   struct namechange ncs;
   ncs.oldname = oldname;

@@ -29,8 +29,7 @@ NAMELIST boardlist;
 /* stuff in c_users.c for the permission mask setting */
 extern LONG SetPermMenu __P((LONG));
 
-CheckBoardName(bname)
-char *bname;
+CheckBoardName(char *bname)
 {
   BOARD buf;
   if (bname[0] == '\0') return 1;
@@ -40,10 +39,7 @@ char *bname;
 }
 
 /*ARGSUSED*/
-AllBoardsFunc(indx, board, info)
-int indx;
-BOARD *board;
-struct enum_info *info;
+AllBoardsFunc( int indx, BOARD *board, struct enum_info *info )
 {
   if (info->topline == info->currline) {
     move(info->topline-1, 0);
@@ -97,10 +93,7 @@ Boards()
 }
 
 /*ARGSUSED*/
-BoardCountsFunc(indx, board, info)
-int indx;
-BOARD *board;
-struct enum_info *info;
+BoardCountsFunc( int indx, BOARD *board, struct enum_info *info )
 {
   if (info->topline == info->currline) {
     move(info->topline-1, 0);
@@ -257,9 +250,7 @@ Visit()
   return FULLUPDATE;
 }
 
-SetBoardPerms(brec, postp)
-BOARD *brec;
-int postp;
+SetBoardPerms( BOARD *brec, int postp )
 {
   LONG newperms;
   move(2,0);

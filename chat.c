@@ -41,9 +41,7 @@ extern SERVERDATA server;
 int chatfd = -1;
 int inchat = 0;
 
-unsigned short
-_read_daemoninfo(fname)
-char *fname;
+unsigned short _read_daemoninfo( char *fname )
 {
   FILE *fp;
   char buf[5];
@@ -79,9 +77,7 @@ _start_chat_daemon()
   return 0;
 }
 
-local_bbs_chat(chatid, pfd)
-char *chatid;
-LONG *pfd;
+local_bbs_chat( char *chatid, LONG *pfd )
 {
   CHATLINE sendbuf;
   int rc, daemon_started = 0;
@@ -179,8 +175,7 @@ local_bbs_exit_chat()
   return S_OK;
 }
 
-local_bbs_chat_send(buf)
-char *buf;
+local_bbs_chat_send(char *buf)
 {
   int len = strlen(buf);
   if (chatfd == -1 || inchat == 0) return S_DENIED;
@@ -192,10 +187,7 @@ char *buf;
   return S_OK;
 }  
 
-remote_bbs_chat(chatid, pport, magicstr)
-char *chatid;
-unsigned short *pport;
-char *magicstr;
+remote_bbs_chat( char *chatid, unsigned short *pport, char *magicstr )
 {
   /* Assumes magicstr is big enough (should be 256 chars) */
   int daemon_started = 0;
