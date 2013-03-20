@@ -45,7 +45,7 @@ struct usertopid {
   int count;
 };
 
-void page_handler(intsig)
+void page_handler(int sig)
 {
   bell();
   bell();
