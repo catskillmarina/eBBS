@@ -140,7 +140,7 @@ local_bbs_add_board( BOARD *newboard )
   return S_OK;
 }
 
-local_bbs_delete_board(chat *bname)
+local_bbs_delete_board(char *bname)
 {
   int rc;
   BOARD board;
