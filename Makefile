@@ -188,7 +188,7 @@ y.tab.c: gram.y
 	$(YACC) $(YFLAGS) gram.y
 
 lbbs: $(LOBJS) $(LLIBS)
-	$(LD) $(LDFLAGS) -o lbbs $(LOBJS) $(LLIBS) $(LIBS) -ltermcap
+	$(LD) $(LDFLAGS) -o lbbs $(LOBJS) $(LLIBS) $(LIBS) -lcurses
 
 srcdist:
 	rm -f ebbssrc.tar ebbssrc.tar.gz 
